@@ -27,11 +27,16 @@ To switch versions, swap the `--model` checkpoint in each script to the desired 
 ├── README.md
 ├── requirements.txt
 ├── scripts
-│   ├── classify.py
-│   ├── detect.py
-│   ├── oriented_detect.py
-│   ├── pose.py
-│   └── segment.py
+│   ├── classify
+│   │   └── classify.py
+│   ├── detect
+│   │   └── detect.py
+│   ├── oriented_detect
+│   │   └── oriented_detect.py
+│   ├── pose
+│   │   └── pose.py
+│   └── segment
+│       └── segment.py
 └── .gitignore
 ```
 
@@ -58,35 +63,35 @@ python -m pip install -r requirements.txt
 ### 1) Image Classification
 
 ```bash
-python scripts/classify.py \
+python scripts/classify/classify.py \
   --source https://ultralytics.com/images/bus.jpg
 ```
 
 ### 2) Object Detection
 
 ```bash
-python scripts/detect.py \
+python scripts/detect/detect.py \
   --source https://ultralytics.com/images/bus.jpg
 ```
 
 ### 3) Oriented Object Detection (OBB)
 
 ```bash
-python scripts/oriented_detect.py \
+python scripts/oriented_detect/oriented_detect.py \
   --source https://ultralytics.com/images/bus.jpg
 ```
 
 ### 4) Instance Segmentation
 
 ```bash
-python scripts/segment.py \
+python scripts/segment/segment.py \
   --source https://ultralytics.com/images/bus.jpg
 ```
 
 ### 5) Human Pose Estimation
 
 ```bash
-python scripts/pose.py \
+python scripts/pose/pose.py \
   --source https://ultralytics.com/images/zidane.jpg
 ```
 
