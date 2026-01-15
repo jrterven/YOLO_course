@@ -15,6 +15,8 @@ import cv2
 from ultralytics import YOLO
 
 DEFAULT_SOURCE = str(Path(__file__).resolve().parents[2] / "images" / "bus.jpg")
+MODEL_NAME = "yolo26n-cls.pt"
+DEFAULT_MODEL = str(Path(__file__).resolve().parents[2] / "models" / MODEL_NAME)
 
 
 def parse_args() -> argparse.Namespace:
@@ -22,7 +24,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="YOLO26 image classification demo")
     parser.add_argument(
         "--model",
-        default="yolo26n-cls.pt",
+        default=DEFAULT_MODEL,
         help="YOLO26 classification model checkpoint",
     )
     parser.add_argument(

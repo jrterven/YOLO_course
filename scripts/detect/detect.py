@@ -11,10 +11,13 @@ Example:
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 
 from ultralytics import YOLO
 
 DEFAULT_SOURCE = "https://ultralytics.com/images/bus.jpg"
+MODEL_NAME = "yolo26n.pt"
+DEFAULT_MODEL = str(Path(__file__).resolve().parents[2] / "models" / MODEL_NAME)
 
 
 def parse_args() -> argparse.Namespace:
@@ -22,7 +25,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="YOLO26 object detection demo")
     parser.add_argument(
         "--model",
-        default="yolo26n.pt",
+        default=DEFAULT_MODEL,
         help="YOLO26 detection model checkpoint",
     )
     parser.add_argument(
