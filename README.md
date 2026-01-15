@@ -107,6 +107,18 @@ python scripts/pose/pose.py \
 
 By default, outputs are saved under `runs/` with task-specific subfolders. You can customize the model, confidence threshold, device, and output location using CLI flags in each script.
 
+## Pretrained Model Data Sources
+
+Ultralytics YOLO26 models in this repo are pretrained on the following datasets:
+
+- **Classification**: [ImageNet](https://github.com/ultralytics/ultralytics/blob/main/ultralytics/cfg/datasets/ImageNet.yaml)
+- **Detection**: [COCO](https://cocodataset.org/) (val2017)
+- **Segmentation**: [COCO](https://cocodataset.org/) (val2017)
+- **Pose**: [COCO Keypoints](https://cocodataset.org/) (val2017)
+- **Oriented Detection (OBB)**: [DOTAv1](https://github.com/ultralytics/ultralytics/blob/main/ultralytics/cfg/datasets/DOTAv1.yaml)
+
+Source: Ultralytics task docs for [classification](https://docs.ultralytics.com/tasks/classify/), [detection](https://docs.ultralytics.com/tasks/detect/), [segmentation](https://docs.ultralytics.com/tasks/segment/), [pose](https://docs.ultralytics.com/tasks/pose/), and [OBB](https://docs.ultralytics.com/tasks/obb/).
+
 ## Notes on Default Models
 
 The scripts default to YOLO26 nano checkpoints for fast execution:
