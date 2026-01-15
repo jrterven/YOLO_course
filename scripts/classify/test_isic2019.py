@@ -3,8 +3,8 @@
 
 Example:
     python scripts/classify/test_isic2019.py \
-      --model runs/isic2019_cls/weights/best.pt \
-      --data data/isic2019_yolo
+      --model /Users/juanterven/dev/yolo_course/notebooks/runs/isic2019_cls2/weights/best.pt \
+      --data /Users/juanterven/data/isic2019_yolo
 """
 
 from __future__ import annotations
@@ -14,8 +14,8 @@ from pathlib import Path
 
 from ultralytics import YOLO
 
-DEFAULT_DATA = Path(__file__).resolve().parents[2] / "data" / "isic2019_yolo"
-DEFAULT_MODEL = Path(__file__).resolve().parents[2] / "runs" / "isic2019_cls" / "weights" / "best.pt"
+DEFAULT_DATA = Path("/Users/juanterven/data/isic2019_yolo")
+DEFAULT_MODEL = Path("/Users/juanterven/dev/yolo_course/notebooks/runs/isic2019_cls2/weights/best.pt")
 
 
 def parse_args() -> argparse.Namespace:
