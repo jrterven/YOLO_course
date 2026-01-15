@@ -1,6 +1,6 @@
-# YOLO26 Course
+# YOLO Course
 
-A hands-on, script-first course that demonstrates how to use Ultralytics **YOLO26** for five core computer vision tasks:
+A hands-on, script-first course that demonstrates how to use **Ultralytics YOLO** models for five core computer vision tasks:
 
 1. Image classification
 2. Object detection
@@ -9,6 +9,16 @@ A hands-on, script-first course that demonstrates how to use Ultralytics **YOLO2
 5. Human pose estimation
 
 Each lesson lives in a focused Python script under `scripts/` so students can read, run, and modify the workflow in one place.
+
+## Supported YOLO Versions
+
+The scripts are compatible with Ultralytics YOLO releases that share the same Python API, including:
+
+- YOLO26 (default models in this repo)
+- YOLO11
+- YOLOv8
+
+To switch versions, swap the `--model` checkpoint in each script to the desired model name.
 
 ## Repository Layout
 
@@ -33,11 +43,15 @@ Each lesson lives in a focused Python script under `scripts/` so students can re
 ## Setup
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+conda create -n yolo26 python=3.10
+conda activate yolo26
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
+
+> Note: `ultralytics` depends on PyTorch. Pip will install a CPU build of PyTorch by
+> default. For GPU acceleration, install a CUDA-enabled PyTorch build first from
+> https://pytorch.org/get-started/locally/ and then install `ultralytics`.
 
 ## Quickstart
 
@@ -78,7 +92,7 @@ python scripts/pose.py \
 
 By default, outputs are saved under `runs/` with task-specific subfolders. You can customize the model, confidence threshold, device, and output location using CLI flags in each script.
 
-## Notes on YOLO26 Models
+## Notes on Default Models
 
 The scripts default to YOLO26 nano checkpoints for fast execution:
 
@@ -98,4 +112,4 @@ You can swap in `s`, `m`, `l`, or `x` versions for higher accuracy.
 
 ---
 
-Built with the Ultralytics YOLO26 models: https://docs.ultralytics.com/models/yolo26/
+Built with Ultralytics YOLO models (YOLO26 defaults): https://docs.ultralytics.com/models/yolo26/
