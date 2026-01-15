@@ -64,36 +64,46 @@ python -m pip install -r requirements.txt
 
 ```bash
 python scripts/classify/classify.py \
-  --source https://ultralytics.com/images/bus.jpg
+  --source images/bus.jpg
 ```
+
+![Classification results](image_results/classify_results.jpg)
 
 ### 2) Object Detection
 
 ```bash
 python scripts/detect/detect.py \
-  --source https://ultralytics.com/images/bus.jpg
+  --source images/bus.jpg
 ```
+
+![Detection results](image_results/detect_results.jpg)
 
 ### 3) Oriented Object Detection (OBB)
 
 ```bash
 python scripts/oriented_detect/oriented_detect.py \
-  --source https://ultralytics.com/images/bus.jpg
+  --source images/boats.jpg
 ```
+
+![OBB results](image_results/obb_results.jpg)
 
 ### 4) Instance Segmentation
 
 ```bash
 python scripts/segment/segment.py \
-  --source https://ultralytics.com/images/bus.jpg
+  --source images/bus.jpg
 ```
+
+![Segmentation results](image_results/segment_results.jpg)
 
 ### 5) Human Pose Estimation
 
 ```bash
 python scripts/pose/pose.py \
-  --source https://ultralytics.com/images/zidane.jpg
+  --source images/zidane.jpg
 ```
+
+![Pose results](image_results/pose_results.jpg)
 
 By default, outputs are saved under `runs/` with task-specific subfolders. You can customize the model, confidence threshold, device, and output location using CLI flags in each script.
 
