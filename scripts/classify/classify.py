@@ -58,18 +58,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--show",
         action="store_true",
-        default=True,
+        default=False,
         help="Display the annotated image in an OpenCV window",
     )
     parser.add_argument(
         "--no-save",
         action="store_true",
         help="Disable saving outputs",
-    )
-    parser.add_argument(
-        "--no-show",
-        action="store_true",
-        help="Disable displaying the OpenCV window",
     )
     parser.add_argument(
         "--project",
@@ -88,7 +83,7 @@ def main() -> None:
     """Run YOLO26 classification with the provided arguments."""
     args = parse_args()
     save_outputs = args.save and not args.no_save
-    show_outputs = args.show and not args.no_show
+    show_outputs = args.show
 
     model = YOLO(args.model)
     results = model.predict(

@@ -11,6 +11,7 @@ Example:
 from __future__ import annotations
 
 import argparse
+import cv2
 from pathlib import Path
 
 from ultralytics import YOLO
@@ -63,6 +64,12 @@ def parse_args() -> argparse.Namespace:
         help="Save outputs to the runs/ directory",
     )
     parser.add_argument(
+        "--show",
+        action="store_true",
+        default=False,
+        help="Display the annotated image in an OpenCV window",
+    )
+    parser.add_argument(
         "--no-save",
         action="store_true",
         help="Disable saving outputs",
@@ -84,9 +91,10 @@ def main() -> None:
     """Run YOLO26 detection with the provided arguments."""
     args = parse_args()
     save_outputs = args.save and not args.no_save
+    show_outputs = args.show
 
     model = YOLO(args.model)
-    model.predict(
+    results = model.predict(
         source=args.source,
         imgsz=args.imgsz,
         conf=args.conf,
@@ -96,6 +104,14 @@ def main() -> None:
         project=args.project,
         name=args.name,
     )
+
+    if show_outputs:
+        for index, result in enumerate(results, start=1):
+            annotated = result.plot()
+            window_name = f"YOLO Detection ({index}/{len(results)})"
+            cv2.imshow(window_name, annotated)
+            cv2.waitKey(0)
+            cv2.destroyWindow(window_name)
 
     print("Detection complete.")
     if save_outputs:
