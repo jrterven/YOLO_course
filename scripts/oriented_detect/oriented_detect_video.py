@@ -15,6 +15,7 @@ import argparse
 from pathlib import Path
 
 import cv2
+import numpy as np
 from ultralytics import YOLO
 
 MODEL_NAME = "yolo26n-obb.pt"
@@ -62,6 +63,36 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def annotate_obb(result) -> "cv2.typing.MatLike":
+    """Draw oriented bounding boxes using OpenCV."""
+    image = result.orig_img.copy()
+    obb = result.obb
+    if obb is None or obb.xyxyxyxy is None:
+        return image
+
+    # result.obb.xyxyxyxy -> (N, 4, 2) polygon corners for each box
+    # result.obb.conf -> (N,) confidence scores
+    # result.obb.cls -> (N,) class indices
+    for polygon, conf, cls_id in zip(obb.xyxyxyxy, obb.conf, obb.cls):
+        points = np.array(polygon.tolist(), dtype=np.int32)
+        cv2.polylines(image, [points], True, (0, 255, 0), 2)
+
+        cls_id = int(cls_id)
+        label = result.names[cls_id] if result.names else str(cls_id)
+        text_origin = tuple(points[0])
+        cv2.putText(
+            image,
+            f"{label}: {float(conf):.2f}",
+            text_origin,
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.6,
+            (0, 255, 0),
+            2,
+        )
+
+    return image
+
+
 def resolve_source(source: str) -> str | int:
     """Convert numeric camera indices to int values."""
     return int(source) if source.isdigit() else source
@@ -91,7 +122,7 @@ def main() -> None:
             device=args.device,
             verbose=False,
         )
-        annotated = results[0].plot()
+        annotated = annotate_obb(results[0])
 
         cv2.imshow(WINDOW_NAME, annotated)
         if cv2.waitKey(1) in (27, ord("q")):

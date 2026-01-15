@@ -62,6 +62,34 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def annotate_detection(result) -> "cv2.typing.MatLike":
+    """Draw detection results using OpenCV."""
+    image = result.orig_img.copy()
+    boxes = result.boxes
+    if boxes is None or boxes.xyxy is None:
+        return image
+
+    # result.boxes.xyxy -> (N, 4) tensor with [x1, y1, x2, y2]
+    # result.boxes.conf -> (N,) tensor with confidence per box
+    # result.boxes.cls -> (N,) tensor with class indices
+    for xyxy, conf, cls_id in zip(boxes.xyxy, boxes.conf, boxes.cls):
+        x1, y1, x2, y2 = [int(v) for v in xyxy.tolist()]
+        cls_id = int(cls_id)
+        label = result.names[cls_id] if result.names else str(cls_id)
+        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+        cv2.putText(
+            image,
+            f"{label}: {float(conf):.2f}",
+            (x1, max(y1 - 6, 20)),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.6,
+            (0, 255, 0),
+            2,
+        )
+
+    return image
+
+
 def resolve_source(source: str) -> str | int:
     """Convert numeric camera indices to int values."""
     return int(source) if source.isdigit() else source
@@ -91,7 +119,7 @@ def main() -> None:
             device=args.device,
             verbose=False,
         )
-        annotated = results[0].plot()
+        annotated = annotate_detection(results[0])
 
         cv2.imshow(WINDOW_NAME, annotated)
         if cv2.waitKey(1) in (27, ord("q")):

@@ -56,6 +56,50 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def annotate_classification(result) -> "cv2.typing.MatLike":
+    """Draw classification results using OpenCV."""
+    image = result.orig_img.copy()
+    probs = result.probs
+    if probs is None:
+        return image
+
+    # probs.top1 -> class index of the best prediction
+    # probs.top1conf -> confidence score for that class
+    # result.names maps class indices to label strings
+    top1 = int(probs.top1)
+    top1_conf = float(probs.top1conf)
+    label = result.names[top1] if result.names else str(top1)
+    cv2.putText(
+        image,
+        f"{label}: {top1_conf:.2f}",
+        (10, 30),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.8,
+        (0, 255, 0),
+        2,
+    )
+
+    # probs.top5 / probs.top5conf -> top-5 class indices and confidences
+    if hasattr(probs, "top5") and hasattr(probs, "top5conf"):
+        y_offset = 55
+        for cls_id, conf in zip(probs.top5, probs.top5conf):
+            cls_id = int(cls_id)
+            conf = float(conf)
+            label = result.names[cls_id] if result.names else str(cls_id)
+            cv2.putText(
+                image,
+                f"{label}: {conf:.2f}",
+                (10, y_offset),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.6,
+                (255, 255, 255),
+                1,
+            )
+            y_offset += 18
+
+    return image
+
+
 def resolve_source(source: str) -> str | int:
     """Convert numeric camera indices to int values."""
     return int(source) if source.isdigit() else source
@@ -84,7 +128,7 @@ def main() -> None:
             device=args.device,
             verbose=False,
         )
-        annotated = results[0].plot()
+        annotated = annotate_classification(results[0])
 
         cv2.imshow(WINDOW_NAME, annotated)
         if cv2.waitKey(1) in (27, ord("q")):
