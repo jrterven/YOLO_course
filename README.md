@@ -109,6 +109,18 @@ By default, outputs are saved under `runs/` with task-specific subfolders. You c
 
 For training notebooks and dataset download instructions, see [`notebooks/README.md`](notebooks/README.md).
 
+### ISIC 2020 Custom Classification
+
+- Dataset: https://challenge.isic-archive.com/data/#2020
+- Notebook: [`notebooks/isic_classification_training.ipynb`](notebooks/isic_classification_training.ipynb)
+- Test script:
+
+```bash
+python scripts/classify/test_isic2020.py \
+  --model runs/isic2020_cls/weights/best.pt \
+  --data data/isic2020_yolo
+```
+
 ## Pretrained Model Data Sources
 
 Ultralytics YOLO26 models in this repo are pretrained on the following datasets:
