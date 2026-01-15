@@ -5,7 +5,7 @@ Run YOLO26 pose estimation on an image, folder, or URL. The default model is
 `yolo26n-pose.pt`, trained to detect person keypoints.
 
 Example:
-    python scripts/pose.py --source https://ultralytics.com/images/zidane.jpg
+    python scripts/pose/pose.py --source images/zidane.jpg
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ from pathlib import Path
 
 from ultralytics import YOLO
 
-DEFAULT_SOURCE = "https://ultralytics.com/images/zidane.jpg"
+DEFAULT_SOURCE = str(Path(__file__).resolve().parents[2] / "images" / "zidane.jpg")
 MODEL_NAME = "yolo26n-pose.pt"
 DEFAULT_MODEL = str(Path(__file__).resolve().parents[2] / "models" / MODEL_NAME)
 

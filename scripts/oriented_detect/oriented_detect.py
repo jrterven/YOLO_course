@@ -5,7 +5,7 @@ Run YOLO26 oriented bounding box detection on an image, folder, or URL. The
 default model is `yolo26n-obb.pt`, trained for rotated object detection.
 
 Example:
-    python scripts/oriented_detect/oriented_detect.py --source https://ultralytics.com/images/boats.jpg
+    python scripts/oriented_detect/oriented_detect.py --source images/boats.jpg
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ from pathlib import Path
 
 from ultralytics import YOLO
 
-DEFAULT_SOURCE = "https://ultralytics.com/images/boats.jpg"
+DEFAULT_SOURCE = str(Path(__file__).resolve().parents[2] / "images" / "boats.jpg")
 MODEL_NAME = "yolo26n-obb.pt"
 DEFAULT_MODEL = str(Path(__file__).resolve().parents[2] / "models" / MODEL_NAME)
 
