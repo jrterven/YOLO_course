@@ -22,10 +22,16 @@ mkdir -p data/isic2019_raw
 
 Expected raw layout:
 
-**ISIC 2019**
+**ISIC 2019 (Training)**
 ```
 ISIC_2019_Training_Input/
 ISIC_2019_Training_GroundTruth.csv
+```
+
+**ISIC 2019 (Test)**
+```
+ISIC_2019_Test_Input/
+ISIC_2019_Test_GroundTruth.csv
 ```
 
 Put the files under `data/isic2019_raw/` so the notebook can find them.
@@ -39,7 +45,7 @@ RAW_DATA_DIR = Path("../data/isic2019_raw")
 OUTPUT_DIR = Path("../data/isic2019_yolo")
 ```
 
-The notebook prepares train/val/test splits from the labeled training data (so the test split has ground truth) and trains a YOLO classification model.
+The notebook creates train/val splits from the labeled training data and uses the official test set for evaluation.
 
 ### 4) Test the Trained Model
 
