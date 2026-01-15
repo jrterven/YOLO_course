@@ -107,6 +107,8 @@ python scripts/pose/pose.py \
 
 By default, outputs are saved under `runs/` with task-specific subfolders. You can customize the model, confidence threshold, device, and output location using CLI flags in each script.
 
+For training notebooks and dataset download instructions, see [`notebooks/README.md`](notebooks/README.md).
+
 ## Pretrained Model Data Sources
 
 Ultralytics YOLO26 models in this repo are pretrained on the following datasets:
