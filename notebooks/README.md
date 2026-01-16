@@ -14,7 +14,7 @@ This notebook trains a binary classifier on the Hymenoptera (Ants vs Bees) datas
 
 ### 2) Place Data Locally
 
-Rename the downloaded folder to `ants_bees_raw` and place it in your data directory:
+Donwload the dataset and place it in your data directory inside a folder called `ants_bees_raw`:
 
 ```bash
 mkdir -p /YOUR_DATA_DIRECTORY/ants_bees_raw
