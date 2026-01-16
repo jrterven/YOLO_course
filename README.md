@@ -135,6 +135,18 @@ python scripts/classify/test_isic2019.py \
   --data data/isic2019_yolo
 ```
 
+### Ants vs Bees Binary Classification
+
+- Dataset: https://download.pytorch.org/tutorial/hymenoptera_data.zip
+- Notebook: [`notebooks/ants_bees_classification_training.ipynb`](notebooks/ants_bees_classification_training.ipynb)
+- Test script:
+
+```bash
+python scripts/classify/test_ants_bees.py \
+  --model runs/ants_bees_cls/weights/best.pt \
+  --data /Users/juanterven/data/ants_bees_yolo
+```
+
 ## Notes on Default Models
 
 The scripts default to YOLO26 nano checkpoints for fast execution:
