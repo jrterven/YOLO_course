@@ -10,10 +10,8 @@ Example:
 """
 
 from __future__ import annotations
-
 import argparse
 from pathlib import Path
-
 import cv2
 from ultralytics import YOLO
 

@@ -130,6 +130,7 @@ def main() -> None:
     show_outputs = args.show
 
     model = YOLO(args.model)
+
     results = model.predict(
         source=args.source,
         imgsz=args.imgsz,
