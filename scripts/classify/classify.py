@@ -62,6 +62,12 @@ def parse_args() -> argparse.Namespace:
         help="Display the annotated image in an OpenCV window",
     )
     parser.add_argument(
+        "--visualize",
+        action="store_true",
+        default=False,
+        help="Enable Ultralytics visualize mode during prediction",
+    )
+    parser.add_argument(
         "--no-save",
         action="store_true",
         help="Disable saving outputs",
@@ -137,6 +143,7 @@ def main() -> None:
         conf=args.conf,
         device=args.device,
         save=save_outputs,
+        visualize=args.visualize,
         project=args.project,
         name=args.name,
     )
